@@ -59,4 +59,32 @@ namespace GtkSharpME
 			base.Render (window, widget, background_area, cell_area, expose_area, flags);
 		}
 	}
+
+	public class CellRendererStringify
+		: Gtk.CellRendererText
+	{
+		[Property("object")]
+		public object Object
+		{ get; set; }
+
+		public override void GetSize (Gtk.Widget widget, ref Gdk.Rectangle cell_area,
+		                              out int x_offset, out int y_offset,
+		                              out int width, out int height)
+		{
+			Text = Object.ToString();
+
+			base.GetSize (widget, ref cell_area,
+			              out x_offset, out y_offset,
+			              out width, out height);
+		}
+
+		protected override void Render (Gdk.Drawable window, Gtk.Widget widget,
+		                                Gdk.Rectangle background_area, Gdk.Rectangle cell_area,
+		                                Gdk.Rectangle expose_area, Gtk.CellRendererState flags)
+		{
+			Text = Object.ToString();
+
+			base.Render (window, widget, background_area, cell_area, expose_area, flags);
+		}
+	}
 }
