@@ -45,6 +45,7 @@
     <Compile Include="Sources\AssemblyInfo.cs" />
     <Compile Include="Sources\TreeModel.cs" />
     <Compile Include="Sources\TreeView.cs" />
+    <Compile Include="Sources\CellRenderer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
