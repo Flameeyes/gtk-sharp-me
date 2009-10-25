@@ -49,5 +49,32 @@ namespace GtkSharpME
 
 			return iter;
 		}
+
+		public static object[] GetRow(this Gtk.TreeModel model, Gtk.TreeIter iter)
+		{
+			object[] row = new object[model.NColumns];
+			for(int i = 0; i < model.NColumns; i++) {
+				row[i] = model.GetValue(iter, i);
+			}
+
+			return row;
+		}
+
+		public static object[] Find(this Gtk.TreeModel model, Predicate<object[]> predicate)
+		{
+			Gtk.TreeIter iter;
+
+			if ( !model.GetIterFirst(out iter) )
+				return null;
+
+			do {
+				object[] row = model.GetRow(iter);
+				if ( predicate(row) )
+					return row;
+
+			} while ( model.IterNext(ref iter) );
+
+			return null;
+		}
 	}
 }
